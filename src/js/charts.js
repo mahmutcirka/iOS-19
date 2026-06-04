@@ -152,3 +152,5 @@
     // Make available globally
     window.initCVSSRadar = initCVSSRadar;
 })();
+
+// Radar chart config initialization
