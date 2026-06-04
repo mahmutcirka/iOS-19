@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS 19 SessizMesaj — iMessage Sıfır Tıklama Güvenlik Açığı (CVE-2026-1199)</title>
+    <meta name="description" content="iOS 19 ImageIO çerçevesinde HEIC görüntü ayrıştırma bellek bozulması güvenlik açığının çok boyutlu siber güvenlik analizi dashboard'u.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Cyber Background Canvas -->
+    <canvas id="cyber-bg"></canvas>
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CVE-2026-<span class="accent">1199</span></span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#overview">Özet</a></li>
+                <li><a href="#cvss">CVSS</a></li>
+                <li><a href="#attack-flow">Saldırı Akışı</a></li>
+                <li><a href="#timeline">Zaman Çizelgesi</a></li>
+                <li><a href="#mitre">MITRE ATT&CK</a></li>
+                <li><a href="#red-team">Red Team</a></li>
+                <li><a href="#blue-team">Blue Team</a></li>
+                <li><a href="#simulation">Simülasyon</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-particles" id="hero-particles"></div>
+        <div class="hero-content">
+
+            <h1 class="hero-title">
+                <span class="title-line">iOS 19</span>
+                <span class="title-line glitch" data-text="SessizMesaj">SessizMesaj</span>
+            </h1>
+            <p class="hero-subtitle">iMessage Sıfır Tıklama Güvenlik Açığı</p>
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <span class="meta-label">CVE</span>
+                    <span class="meta-value">CVE-2026-1199</span>
+                </div>
+                <div class="meta-item cvss-critical">
+                    <span class="meta-label">CVSS</span>
+                    <span class="meta-value cvss-score">9.8</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">TİP</span>
+                    <span class="meta-value">Sıfır Tıklama</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">HEDEF</span>
+                    <span class="meta-value">iMessage / ImageIO</span>
+                </div>
+            </div>
+            <div class="hero-tags">
+                <span class="tag tag-critical">KRİTİK</span>
+                <span class="tag tag-zero">Zero-Click</span>
+                <span class="tag tag-spyware">Casus Yazılım</span>
+
+            </div>
+            <a href="#overview" class="hero-cta">
+                <span>Analizi İncele</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </a>
+        </div>
+        <div class="hero-scanline"></div>
+    </section>
+
+    <!-- Vulnerability Overview -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">📋</span>
+                <h2 class="section-title">Zafiyet Özeti</h2>
+                <p class="section-subtitle">CVE-2026-1199 — Çok Boyutlu Güvenlik Analizi</p>
+            </div>
+            <div class="overview-grid">
+                <div class="glass-card overview-main">
+                    <h3 class="card-title">Genel Bakış</h3>
+                    <p class="card-text" id="overview-text"></p>
+                    <div class="impact-box">
+                        <h4>Etki Analizi</h4>
+                        <p id="impact-text"></p>
+                    </div>
+                </div>
+                <div class="glass-card overview-stats">
+                    <h3 class="card-title">Temel Metrikler</h3>
+                    <div class="stat-grid" id="stat-grid"></div>
+                </div>
+                <div class="glass-card overview-affected">
+                    <h3 class="card-title">Etkilenen Sistemler</h3>
+                    <ul class="affected-list" id="affected-list"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CVSS Radar Chart -->
+    <section id="cvss" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h2 class="section-title">CVSS v3.1 Vektör Analizi</h2>
+                <p class="section-subtitle">Sekiz boyutlu güvenlik açığı risk değerlendirmesi</p>
+            </div>
+            <div class="cvss-grid">
+                <div class="glass-card cvss-chart-container">
+                    <canvas id="cvss-radar" width="500" height="500"></canvas>
+                </div>
+                <div class="glass-card cvss-details">
+                    <h3 class="card-title">CVSS Vektör Detayları</h3>
+                    <div class="cvss-vector-string">
+                        <code id="cvss-vector-code"></code>
+                    </div>
+                    <div class="cvss-metrics-list" id="cvss-metrics-list"></div>
+                    <div class="cvss-score-display">
+                        <div class="score-circle critical">
+                            <span class="score-number">9.8</span>
+                            <span class="score-label">KRİTİK</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attack Flow -->
+    <section id="attack-flow" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">⚔️</span>
+                <h2 class="section-title">Saldırı Akışı</h2>
+                <p class="section-subtitle">Altı aşamalı istismar zinciri anatomisi</p>
+            </div>
+            <div class="attack-flow-container" id="attack-flow-container"></div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section id="timeline" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">📅</span>
+                <h2 class="section-title">Olay Zaman Çizelgesi</h2>
+                <p class="section-subtitle">Keşiften yamaya kronolojik süreç</p>
+            </div>
+            <div class="timeline-container" id="timeline-container"></div>
+        </div>
+    </section>
+
+    <!-- MITRE ATT&CK -->
+    <section id="mitre" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">🗺️</span>
+                <h2 class="section-title">MITRE ATT&CK Haritalama</h2>
+                <p class="section-subtitle">Saldırı taktik ve tekniklerinin çerçeve eşleştirmesi</p>
+            </div>
+            <div class="mitre-grid" id="mitre-grid"></div>
+        </div>
+    </section>
+
+    <!-- Red Team -->
+    <section id="red-team" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">🔴</span>
+                <h2 class="section-title">Red Team Analizi</h2>
+                <p class="section-subtitle">Saldırgan perspektifinden tehdit değerlendirmesi</p>
+            </div>
+            <div class="team-grid" id="red-team-content"></div>
+        </div>
+    </section>
+
+    <!-- Blue Team -->
+    <section id="blue-team" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">🔵</span>
+                <h2 class="section-title">Blue Team Analizi</h2>
+                <p class="section-subtitle">Savunma perspektifinden tespit ve önleme stratejileri</p>
+            </div>
+            <div class="team-grid" id="blue-team-content"></div>
+        </div>
+    </section>
+
+    <!-- Live Simulation -->
+    <section id="simulation" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">⚡</span>
+                <h2 class="section-title">Canlı Saldırı Simülasyonu</h2>
+                <p class="section-subtitle">Red Team vs Blue Team gerçek zamanlı simülasyon</p>
+            </div>
+            <div class="simulation-container">
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-start" id="sim-start">
+                        <span>▶</span> Simülasyonu Başlat
+                    </button>
+                    <button class="sim-btn sim-btn-stop" id="sim-stop" disabled>
+                        <span>⏹</span> Durdur
+                    </button>
+                    <button class="sim-btn sim-btn-reset" id="sim-reset">
+                        <span>↺</span> Sıfırla
+                    </button>
+                </div>
+                <div class="sim-grid">
+                    <div class="glass-card sim-panel sim-red">
+                        <h3 class="sim-panel-title red-title">🔴 Red Team — Saldırgan</h3>
+                        <div class="sim-log" id="sim-red-log"></div>
+                        <div class="sim-progress">
+                            <div class="progress-bar red-bar" id="sim-red-progress"></div>
+                        </div>
+                        <div class="sim-status" id="sim-red-status">Bekleniyor...</div>
+                    </div>
+                    <div class="sim-vs">
+                        <span class="vs-text">VS</span>
+                        <div class="vs-indicator" id="vs-indicator"></div>
+                    </div>
+                    <div class="glass-card sim-panel sim-blue">
+                        <h3 class="sim-panel-title blue-title">🔵 Blue Team — Savunma</h3>
+                        <div class="sim-log" id="sim-blue-log"></div>
+                        <div class="sim-progress">
+                            <div class="progress-bar blue-bar" id="sim-blue-progress"></div>
+                        </div>
+                        <div class="sim-status" id="sim-blue-status">Bekleniyor...</div>
+                    </div>
+                </div>
+                <div class="sim-result glass-card" id="sim-result" style="display:none;">
+                    <h3 id="sim-result-title"></h3>
+                    <p id="sim-result-text"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- References -->
+    <section id="references" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-icon">📚</span>
+                <h2 class="section-title">Kaynaklar ve Referanslar</h2>
+            </div>
+            <div class="references-grid" id="references-grid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/%C4%B0stinye_%C3%9Cniversitesi_logo.svg/1280px-%C4%B0stinye_%C3%9Cniversitesi_logo.svg.png" alt="İstinye Üniversitesi" class="footer-uni-logo">
+                    </div>
+                    <p class="footer-text">Bu proje İstinye Üniversitesi BGT006 Sızma Testi dersi kapsamında hazırlanmıştır.</p>
+                </div>
+                <div class="footer-details">
+                    <div class="footer-col">
+                        <h4>Danışman</h4>
+                        <p>Keyvan Arasteh</p>
+                        <a href="https://github.com/keyvanarasteh" target="_blank">@keyvanarasteh</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Öğrenci</h4>
+                        <p>Mahmut Çirka</p>
+                        <p>2520191026</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Ders</h4>
+                        <p>BGT006 — Sızma Testi</p>
+                        <p>2025-2026 Bahar</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Mahmut Çirka — İstinye Üniversitesi | Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/simulation.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
