@@ -210,3 +210,5 @@
         initSimulation();
     }
 })();
+
+// Event listeners for simulation controls
