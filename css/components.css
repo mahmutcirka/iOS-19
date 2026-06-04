@@ -1,0 +1,289 @@
+/* ============================================
+   COMPONENTS.CSS — Additional Component Styles
+   ============================================ */
+
+/* Simulation specific styles */
+.sim-red { border-color: rgba(255, 51, 51, 0.2); }
+.sim-blue { border-color: rgba(0, 136, 255, 0.2); }
+
+.sim-red:hover { border-color: rgba(255, 51, 51, 0.4); }
+.sim-blue:hover { border-color: rgba(0, 136, 255, 0.4); }
+
+.log-entry {
+    padding: 0.15rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+
+.log-entry .timestamp {
+    color: var(--text-secondary);
+    margin-right: 0.5rem;
+    opacity: 0.6;
+}
+
+.log-entry.success { color: var(--success); }
+.log-entry.warning { color: var(--warning); }
+.log-entry.error { color: var(--danger); }
+.log-entry.info { color: var(--primary); }
+
+/* VS indicator animation */
+.vs-indicator {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.vs-indicator::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 51, 51, 0.2);
+}
+
+.vs-indicator::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(0, 136, 255, 0.2);
+}
+
+/* Attack Flow additional */
+.attack-step {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.attack-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.attack-step:nth-child(even) .step-content {
+    text-align: right;
+}
+
+.attack-step:nth-child(even) .step-tech {
+    justify-content: flex-end;
+}
+
+/* MITRE Card Colors */
+.mitre-card .mitre-technique {
+    transition: all 0.3s ease;
+}
+
+.mitre-card .mitre-technique:hover {
+    transform: translateX(5px);
+}
+
+/* Team Panel specific */
+.team-card {
+    transition: all 0.3s ease;
+}
+
+.objectives-list {
+    list-style: none;
+    padding: 0;
+}
+
+.objectives-list li {
+    padding: 0.6rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.objectives-list li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.tool-category, .rule-type {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.tool-category {
+    background: rgba(255, 51, 51, 0.1);
+    color: var(--danger);
+    border: 1px solid rgba(255, 51, 51, 0.2);
+}
+
+.rule-type {
+    background: rgba(0, 136, 255, 0.1);
+    color: #0088ff;
+    border: 1px solid rgba(0, 136, 255, 0.2);
+}
+
+.priority-badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.priority-Kritik, .priority-critical {
+    background: rgba(255, 51, 51, 0.15);
+    color: var(--danger);
+}
+
+.priority-Yüksek, .priority-high {
+    background: rgba(255, 170, 0, 0.15);
+    color: var(--warning);
+}
+
+.priority-Orta, .priority-medium {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--primary);
+}
+
+.ioc-item {
+    font-family: var(--font-mono);
+}
+
+.ioc-type {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(0, 240, 255, 0.15);
+    margin-right: 0.5rem;
+}
+
+.ioc-value {
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    word-break: break-all;
+}
+
+.ioc-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+    font-family: var(--font-main);
+}
+
+/* Reference links */
+.ref-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 240, 255, 0.03);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 240, 255, 0.05);
+}
+
+.ref-link:hover {
+    background: rgba(0, 240, 255, 0.08);
+    color: var(--primary);
+    border-color: var(--border-glass-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-sm);
+}
+
+.ref-icon { font-size: 1.3rem; }
+
+.ref-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.ref-title {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.ref-url {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Tooltip */
+.tooltip {
+    position: absolute;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    max-width: 250px;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: var(--glow-md);
+}
+
+/* Section divider line */
+.section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.section:last-of-type::after {
+    display: none;
+}
+
+/* Scrollbar for log panels */
+.sim-log::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sim-log::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.sim-log::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.2);
+    border-radius: 2px;
+}
+
+/* Selection color */
+::selection {
+    background: rgba(0, 240, 255, 0.3);
+    color: #fff;
+}
