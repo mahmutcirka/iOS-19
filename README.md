@@ -59,6 +59,8 @@ BGT006 Sızma Testi dersi proje kriterleri doğrultusunda hazırlanan resmi değ
 
 Geliştirilen interaktif Cybersecurity Dashboard, araştırmacılar için veriyi yalnızca metin olarak sunmaz; interaktif grafikler ve canlı simülasyonlarla destekler.
 
+![Dashboard Demo](docs/dashboard_demo.webp)
+
 ### Dashboard Özellikleri
 
 | Özellik | Açıklama |
