@@ -223,3 +223,5 @@
         init();
     }
 })();
+
+// Ana uygulama dongusu baslatildi
