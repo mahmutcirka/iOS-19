@@ -1,0 +1,150 @@
+/* =============================================
+   ANIMATIONS - Cyberpunk Dashboard
+   Keyframe animations & utility classes
+   ============================================= */
+
+/* -----------------------------------------------
+   KEYFRAME ANIMATIONS
+   ----------------------------------------------- */
+
+/* Pulse animation for badges and indicators */
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+/* Scanline sweep effect */
+@keyframes scanline {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Glitch text effect */
+@keyframes glitch {
+    0%, 100% { text-shadow: 2px 0 #ff00e5, -2px 0 #00f0ff; }
+    25% { text-shadow: -2px 0 #ff00e5, 2px 0 #00f0ff; }
+    50% { text-shadow: 2px 2px #ff00e5, -2px -2px #00f0ff; }
+    75% { text-shadow: -2px 2px #ff00e5, 2px -2px #00f0ff; }
+}
+
+/* Fade in up for scroll reveal */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade in left */
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Fade in right */
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Float animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Glow pulse */
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); }
+    50% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.3); }
+}
+
+/* Rotate */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Type cursor blink */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Scale in */
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Slide in from bottom (staggered) */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Neon flicker */
+@keyframes neonFlicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 7px rgba(0, 240, 255, 0.5),
+                     0 0 10px rgba(0, 240, 255, 0.5),
+                     0 0 21px rgba(0, 240, 255, 0.5);
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+/* Progress fill */
+@keyframes progressFill {
+    from { width: 0%; }
+}
+
+/* Data flow animation for attack flow lines */
+@keyframes dataFlow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 0% 100%; }
+}
+
+
+/* -----------------------------------------------
+   UTILITY CLASSES
+   ----------------------------------------------- */
+
+/* Scroll reveal animation */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Transition delays for staggered animations */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Named animation utilities */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+.animate-glow {
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+.animate-glitch {
+    animation: glitch 3s infinite;
+}
+
+.animate-neon {
+    animation: neonFlicker 3s infinite;
+}
